@@ -1,0 +1,27 @@
+{
+  "name": "fullstackopen-part3",
+  "version": "1.0.0",
+  "description": "Part 3 of FSO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-seine/fullstackopen-part3.git"
+  },
+  "author": "Nicolas Seine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-seine/fullstackopen-part3/issues"
+  },
+  "homepage": "https://github.com/n-seine/fullstackopen-part3#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
