@@ -32,3 +32,7 @@ app.get("/api/persons", (req, res) => {
   res.json(data);
   res.status(200);
 });
+
+app.get("/info", (req, res) => {
+  res.send(`Phonebook has info for ${data.length} people <br/> ${new Date()}`);
+});
