@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :data ")
 );
+app.use(express.static("dist"));
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
 
 let data = [
