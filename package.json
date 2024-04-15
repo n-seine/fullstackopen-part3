@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/n-seine/fullstackopen-part3#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
