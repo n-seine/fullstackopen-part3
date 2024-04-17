@@ -1,0 +1,11 @@
+GET http://localhost:3001/api/persons/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/info HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3001/api/persons/661fce9a3d72c076d4cbc699 HTTP/1.1
