@@ -4,3 +4,11 @@ Content-Type: application/json
 {"name": "Elon Musk",
  "number": "39-44-111111"
 }
+
+###
+POST http://localhost:3001/api/persons/ HTTP/1.1
+Content-Type: application/json
+
+{"name": "A",
+ "number": "39-44-111111"
+}
