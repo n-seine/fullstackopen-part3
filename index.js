@@ -9,33 +9,29 @@ app.get("/api/persons", (req, res) => {
 
 app.get("/info", async (req, res) => {
   const data = await Person.find({});
-  console.log("data", data);
   res.send(`Phonebook has info for ${data.length} people <br/> ${new Date()}`);
 });
 
-app.get("/api/persons/:id", (req, res) => {
+app.get("/api/persons/:id", (req, res, next) => {
   const id = req.params.id;
-  console.log("id", id);
-  Person.findById(id).then((person) => {
-    if (person) {
-      res.json(person);
-    } else {
-      res.status(404).end();
-    }
-  });
+  Person.findById(id)
+    .then((person) => {
+      if (person) {
+        res.json(person);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
 });
 
-app.delete("/api/persons/:id", (req, res) => {
-  const id = Number(req.params.id);
-  console.log("id", id);
-  if (!data.find((person) => person.id === id)) {
-    console.log("Person with id", id, "does not exist");
-    return res.status(404).end();
-  }
-  data = data.filter((person) => person.id !== id);
-  console.log("Person with id", id, "has been deleted");
-  console.log(data);
-  res.status(204).end();
+app.delete("/api/persons/:id", (req, res, next) => {
+  const id = req.params.id;
+  Person.findByIdAndDelete(id)
+    .then((person) => res.status(204).json(person))
+    .catch((error) => next(error));
 });
 
 app.post("/api/persons", (req, res) => {
@@ -56,3 +52,30 @@ app.post("/api/persons", (req, res) => {
     res.status(201).json(data);
   });
 });
+
+app.put("/api/persons/:id", (req, res, next) => {
+  const body = req.body;
+  const person = {
+    name: body.name,
+    number: body.number,
+  };
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    .then((updatedPerson) => {
+      res.json(updatedPerson);
+    })
+    .catch((error) => next(error));
+});
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: "unknown endpoint" });
+};
+
+//Define error handler
+const errorHandler = (error, req, res, next) => {
+  if (error.name === "CastError") {
+    return res.status(400).send({ error: "malformatted id" });
+  }
+  next(error);
+};
+app.use(unknownEndpoint);
+app.use(errorHandler);
