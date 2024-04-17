@@ -1,4 +1,4 @@
-const mongoose = require("../lib/mongooseConfig");
+const mongoose = require('../lib/mongooseConfig');
 
 const personSchema = new mongoose.Schema({
   name: {
@@ -9,7 +9,7 @@ const personSchema = new mongoose.Schema({
   number: {
     type: String,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return /^[0-9]{2}-[0-9]{6,}|[0-9]{3}-[0-9]{5,}|$ /.test(v);
       },
       message: (props) => `${props.value} is not a valid phone number!`,
@@ -17,7 +17,7 @@ const personSchema = new mongoose.Schema({
     required: true,
   },
 });
-personSchema.set("toJSON", {
+personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -25,4 +25,4 @@ personSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Person", personSchema);
+module.exports = mongoose.model('Person', personSchema);
